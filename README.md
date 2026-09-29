@@ -2,7 +2,7 @@
 
 **Priorise les dépôts de marques françaises potentiellement conflictuels après filtrage par classe, territoire et statut.**
 
-[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.1 · Documentation française
+[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
 
 Le moteur réduit les candidats avec les classes de Nice, le territoire et le statut du dépôt. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
 
@@ -16,6 +16,65 @@ npm run demo
 ```
 
 La démonstration utilise uniquement des données et probabilités synthétiques. Elle n’effectue aucun appel réseau et ne constitue pas une mesure de qualité de Jev.
+
+## Exemple exécutable
+
+Cet exemple compare deux marques partageant des classes de Nice. Il utilise un fournisseur Jev simulé : aucune clé API ni connexion réseau n’est nécessaire. L’assertion intégrée fait échouer la commande si le comportement attendu change.
+
+Le code complet de [`examples/demo.mjs`](examples/demo.mjs) est directement copiable :
+
+```js
+// Objectif : démontrer la frontière de décision sans appel réseau.
+import assert from "node:assert/strict";
+import { assessFiling } from "../src/index.mjs";
+import { createFakeProvider } from "../src/jev.mjs";
+const p = createFakeProvider(() => ({
+  model: "jev-1.13.0",
+  answers: {
+    risk: {
+      type: "choice",
+      choice: "medium_similarity",
+      probabilities: {
+        high_similarity: 0.18,
+        medium_similarity: 0.7,
+        low_similarity: 0.08,
+        unrelated: 0.04,
+      },
+      confidence: 0.7,
+    },
+  },
+  usage: {},
+}));
+const resultat = await assessFiling(
+  {
+    id: "m1",
+    name: "NOVA BUREAU",
+    goods: "logiciel de gestion",
+    niceClasses: [9, 42],
+    territory: "FR",
+  },
+  {
+    id: "m2",
+    name: "NOVO BUREAUX",
+    goods: "services logiciels de gestion",
+    niceClasses: [9, 35, 42],
+    territory: "FR",
+    status: "pending",
+    sourceUrl: "https://data.inpi.fr",
+  },
+  p,
+);
+assert.equal(resultat.risk, "medium_similarity");
+console.log(JSON.stringify(resultat, null, 2));
+```
+
+Lancez-le avec :
+
+```sh
+npm run demo
+```
+
+Résultat à repérer : `risk: medium_similarity`.
 
 ## Utilisation de la bibliothèque
 
