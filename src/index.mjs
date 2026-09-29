@@ -1,4 +1,4 @@
-// Purpose: Implement the package-specific, reviewable decision boundary.
+// Objectif : implémenter la frontière de décision métier propre au dépôt.
 export const RISKS=["high_similarity","medium_similarity","low_similarity","unrelated"];
 function classes(values){const out=[...new Set((values||[]).map(Number))];if(!out.length||out.some(x=>!Number.isInteger(x)||x<1||x>45))throw new TypeError("Nice classes must be integers from 1 to 45");return out.sort((a,b)=>a-b);}
 export function mark(input){if(!input?.id||!input?.name||!input?.territory)throw new TypeError("A mark needs id, name and territory");return{id:String(input.id),name:String(input.name).trim(),goods:String(input.goods||""),niceClasses:classes(input.niceClasses),territory:String(input.territory),status:String(input.status||"active"),sourceUrl:String(input.sourceUrl||"")};}

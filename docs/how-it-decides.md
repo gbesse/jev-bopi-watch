@@ -1,5 +1,5 @@
-# How it decides
+# Comment la décision est prise
 
-Territory, status, dates and Nice-class overlap are filtered in code. Jev assesses conceptual proximity between the supplied signs and goods or services. Results are watch leads, not trademark clearance or legal advice.
+Les classes, territoires, statuts et dates restent dans le code. Le résultat constitue une piste de surveillance et non une recherche d’antériorité exhaustive ou un avis juridique.
 
-The exact questions and criteria are versioned beside the call in [src/index.mjs](../src/index.mjs). Synthetic demo probabilities are illustrative. Calibrate review thresholds on representative labels before operational use.
+La question et les critères exacts sont versionnés dans [`src/index.mjs`](../src/index.mjs). Les probabilités de la démonstration sont synthétiques. Calibrez les seuils de revue sur des cas français annotés et représentatifs avant tout usage opérationnel.

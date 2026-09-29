@@ -1,7 +1,7 @@
 {
   "name": "@gbesse/jev-bopi-watch",
-  "version": "0.1.0",
-  "description": "Prioritize potentially conflicting French trademark filings after deterministic class, territory and status filtering.",
+  "version": "0.1.1",
+  "description": "Priorise les dépôts de marques françaises potentiellement conflictuels après filtrage par classe, territoire et statut.",
   "type": "module",
   "license": "MIT",
   "engines": {
