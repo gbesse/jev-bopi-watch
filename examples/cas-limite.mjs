@@ -1,4 +1,4 @@
-// Cas limite : l’absence de classe commune exclut la comparaison sémantique.
+// Cas limite : sans classe commune ni description des produits, une revue humaine est requise.
 import assert from "node:assert/strict";
 import { assessFiling } from "../src/index.mjs";
 import { createFakeProvider } from "../src/jev.mjs";
@@ -17,6 +17,7 @@ const resultat = await assessFiling(
   },
   jev,
 );
-assert.equal(resultat.risk, "different_classes");
+assert.equal(resultat.risk, "insufficient_goods");
+assert.equal(resultat.review, true);
 assert.equal(jev.calls, 0);
 console.log(JSON.stringify(resultat, null, 2));
