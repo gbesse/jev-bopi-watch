@@ -78,13 +78,13 @@ Résultat à repérer : `risk: medium_similarity`.
 
 ### Cas limite à tester
 
-Des marques sans classe de Nice commune sont séparées immédiatement. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
+Sans classe de Nice commune ni description des produits ou services, le candidat reste dans la file de revue humaine. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
 
 ```sh
 npm run demo:limite
 ```
 
-Résultat à repérer : `risk: different_classes · appels Jev: 0`. La commande `npm run demo` exécute les deux exemples.
+Résultat à repérer : `risk: insufficient_goods · review: true · appels Jev: 0`. La commande `npm run demo` exécute les deux exemples.
 
 ## Utilisation de la bibliothèque
 
