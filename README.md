@@ -1,10 +1,10 @@
 # Jev BOPI Watch
 
-**Priorise les dépôts de marques françaises potentiellement conflictuels après filtrage par classe, territoire et statut.**
+**Priorise les dépôts de marques françaises potentiellement conflictuels sans écarter automatiquement les classes distinctes.**
 
 [![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
 
-Le moteur réduit les candidats avec les classes de Nice, le territoire et le statut du dépôt. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
+Le moteur vérifie le territoire et le statut du dépôt. Un statut autre que `active` ou `pending` demande une revue (`status_unverified`) : il n’est pas présumé inactif. Les territoires `FR` et `EU` sont traités comme se recouvrant ; une autre combinaison non reconnue demande aussi une revue, sans exclusion automatique. Les classes de Nice sont conservées comme indices, mais leur différence ne suffit pas à écarter un candidat. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
 
 ## Démarrage rapide
 
@@ -84,7 +84,7 @@ Les noms de l’API JavaScript restent stables pour préserver la compatibilité
 
 ## Frontière de décision
 
-Les classes, territoires, statuts et dates restent dans le code. Le résultat constitue une piste de surveillance et non une recherche d’antériorité exhaustive ou un avis juridique.
+Les classes, territoires et statuts restent dans le code. Deux marques de classes distinctes restent examinées si leurs produits ou services sont décrits ; sans ces descriptions, `insufficient_goods` impose une revue humaine sans appel Jev. Un résultat Jev interclasses ou entre `FR` et `EU` reste toujours soumis à revue, même si le modèle répond `unrelated`. La classification de Nice est administrative et n’établit pas à elle seule la similarité juridique. Le résultat constitue une piste de surveillance et non une recherche d’antériorité exhaustive ou un avis juridique.
 
 La question exacte envoyée à Jev est versionnée dans [`src/index.mjs`](src/index.mjs). Les identifiants, dates, calculs, filtres, seuils et transitions d’état restent gérés par du code ordinaire.
 
@@ -92,6 +92,8 @@ La question exacte envoyée à Jev est versionnée dans [`src/index.mjs`](src/in
 
 - [https://data.inpi.fr/content/editorial/apis_pi](https://data.inpi.fr/content/editorial/apis_pi)
 - [https://www.inpi.fr/ressources/propriete-intellectuelle/rechercher-une-marque-base-marques](https://www.inpi.fr/ressources/propriete-intellectuelle/rechercher-une-marque-base-marques)
+- [https://www.inpi.fr/realiser-demarches/propriete-intellectuelle/choix-produits-et-services-pour-ma-marque](https://www.inpi.fr/realiser-demarches/propriete-intellectuelle/choix-produits-et-services-pour-ma-marque)
+- [https://www.euipo.europa.eu/fr/trade-marks/before-applying/where-to-register](https://www.euipo.europa.eu/fr/trade-marks/before-applying/where-to-register)
 
 Conservez l’attribution amont, les identifiants d’origine, les URL de source et les dates de récupération avec chaque enregistrement dérivé.
 
