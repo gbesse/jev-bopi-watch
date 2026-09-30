@@ -2,7 +2,7 @@
 
 **Priorise les dépôts de marques françaises potentiellement conflictuels sans écarter automatiquement les classes distinctes.**
 
-[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
+[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
 
 Le moteur vérifie le territoire et le statut du dépôt. Un statut autre que `active` ou `pending` demande une revue (`status_unverified`) : il n’est pas présumé inactif. Les territoires `FR` et `EU` sont traités comme se recouvrant ; une autre combinaison non reconnue demande aussi une revue, sans exclusion automatique. Les classes de Nice sont conservées comme indices, mais leur différence ne suffit pas à écarter un candidat. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
 
@@ -71,10 +71,20 @@ console.log(JSON.stringify(resultat, null, 2));
 Lancez-le avec :
 
 ```sh
-npm run demo
+npm run demo:principal
 ```
 
 Résultat à repérer : `risk: medium_similarity`.
+
+### Cas limite à tester
+
+Des marques sans classe de Nice commune sont séparées immédiatement. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
+
+```sh
+npm run demo:limite
+```
+
+Résultat à repérer : `risk: different_classes · appels Jev: 0`. La commande `npm run demo` exécute les deux exemples.
 
 ## Utilisation de la bibliothèque
 
