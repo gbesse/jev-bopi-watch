@@ -2,7 +2,7 @@
 
 **Priorise les dépôts de marques françaises potentiellement conflictuels sans écarter automatiquement les classes distinctes.**
 
-[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
+[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.4 · Documentation française
 
 Le moteur vérifie le territoire et le statut du dépôt. Un statut autre que `active` ou `pending` demande une revue (`status_unverified`) : il n’est pas présumé inactif. Les territoires `FR` et `EU` sont traités comme se recouvrant ; une autre combinaison non reconnue demande aussi une revue, sans exclusion automatique. Les classes de Nice sont conservées comme indices, mais leur différence ne suffit pas à écarter un candidat. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
 
@@ -116,6 +116,12 @@ TYPESAFE_API_KEY=... node scripts/live-smoke.mjs
 ```
 
 N’envoyez jamais de secret, de donnée personnelle ni de dossier sensible non expurgé. Évaluez le comportement sur un jeu représentatif de cas français avant tout usage opérationnel.
+
+## Parcours comparatif
+
+`npm run demo:parcours` produit un rapport JSON partageable pour **jev-bopi-watch** : le scénario principal et la frontière déterministe. Chaque scénario garde sa sortie propre et échoue si son assertion ne passe plus. Les données et probabilités sont synthétiques ; aucun appel Jev n’est effectué.
+
+Cette vue permet de comparer rapidement les chemins de décision et de choisir quel exemple adapter à vos propres données sourcées.
 
 ## Validation
 
