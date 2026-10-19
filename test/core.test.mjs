@@ -59,3 +59,16 @@ test("overlap is semantically reviewed", async () => {
   const provider = createFakeProvider(() => answer());
   assert.equal((await assessFiling(owned, { ...owned, id: "b", name: "Beta", status: "pending" }, provider)).review, true);
 });
+test("shared classes cannot substitute for either missing goods description", async () => {
+  for (const side of ["owned", "filing"]) {
+    const a = { ...owned }, b = { ...owned, id: "b", status: "pending" };
+    (side === "owned" ? a : b).goods = "   ";
+    const provider = createFakeProvider(() => { throw Error("must not run"); });
+    const result = await assessFiling(a, b, provider);
+    assert.equal(result.risk, "insufficient_goods");
+    assert.deepEqual(result.sharedClasses, [9]);
+    assert.deepEqual(result.missingGoods, [side]);
+    assert.equal(result.review, true);
+    assert.equal(provider.calls, 0);
+  }
+});

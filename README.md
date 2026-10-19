@@ -2,7 +2,7 @@
 
 **Priorise les dépôts de marques françaises potentiellement conflictuels sans écarter automatiquement les classes distinctes.**
 
-[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.4 · Documentation française
+[![Tests](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-bopi-watch/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.5 · Documentation française
 
 Le moteur vérifie le territoire et le statut du dépôt. Un statut autre que `active` ou `pending` demande une revue (`status_unverified`) : il n’est pas présumé inactif. Les territoires `FR` et `EU` sont traités comme se recouvrant ; une autre combinaison non reconnue demande aussi une revue, sans exclusion automatique. Les classes de Nice sont conservées comme indices, mais leur différence ne suffit pas à écarter un candidat. Jev évalue ensuite la proximité conceptuelle des signes et des produits ou services.
 
@@ -135,3 +135,15 @@ npm run demo
 La CI exécute ces vérifications sous Node.js 22 et 24.
 
 Projet indépendant, sans affiliation avec TypeSafe AI ni avec l’administration française. Consultez la [documentation de l’API Jev](https://docs.typesafe.ai/api) et les [limites du modèle](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
+
+## Description requise / Required description / Descripción requerida
+
+**FR.** Une classe de Nice partagée ne remplace pas une description absente. Si les produits ou services de l’une des deux marques ne sont pas décrits, `insufficient_goods` conserve le candidat en revue humaine, même avec des classes communes. `missingGoods` indique `owned`, `filing` ou les deux ; aucun appel Jev n’est fait. Ce garde-fou de contexte ne conclut pas sur une confusion juridique. L’INPI demande de [définir précisément les produits et services](https://www.inpi.fr/realiser-demarches/propriete-intellectuelle/choix-produits-et-services-pour-ma-marque) avant leur classement.
+
+**EN.** Shared Nice classes do not replace missing descriptions. If either mark lacks goods or services text, `insufficient_goods` retains human review even with overlapping classes. `missingGoods` identifies `owned`, `filing` or both; no Jev call is made. This context guard makes no legal-confusion determination. INPI describes [defining precise goods and services](https://www.inpi.fr/realiser-demarches/propriete-intellectuelle/choix-produits-et-services-pour-ma-marque) before classifying them.
+
+**ES.** Compartir clases de Niza no sustituye descripciones ausentes. Si alguna marca carece de texto de productos o servicios, `insufficient_goods` mantiene revisión humana incluso con clases comunes. `missingGoods` indica `owned`, `filing` o ambos; no llama a Jev. Este control de contexto no determina confusión jurídica. INPI explica cómo [definir productos y servicios precisos](https://www.inpi.fr/realiser-demarches/propriete-intellectuelle/choix-produits-et-services-pour-ma-marque) antes de clasificarlos.
+
+```sh
+npm run demo:missing-goods
+```

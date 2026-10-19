@@ -30,10 +30,10 @@ export async function assessFiling(ownedInput, filingInput, provider) {
   if (!sameTerritory && !knownOverlap)
     return { risk: "territory_unverified", review: true, deterministic: true };
   const sharedClasses = owned.niceClasses.filter((value) => filing.niceClasses.includes(value));
-  // Different classes can still contain similar goods or services. Without descriptions,
-  // there is no evidence to assess and the candidate must remain in human review.
-  if (!sharedClasses.length && (!owned.goods.trim() || !filing.goods.trim()))
-    return { risk: "insufficient_goods", sharedClasses, review: true, deterministic: true };
+  // A shared administrative class cannot fill in a missing goods description either.
+  const missingGoods = [!owned.goods.trim() && "owned", !filing.goods.trim() && "filing"].filter(Boolean);
+  if (missingGoods.length)
+    return { risk: "insufficient_goods", sharedClasses, missingGoods, review: true, deterministic: true };
 
   const response = await provider.decide({
     state: { owned, filing, sharedClasses },

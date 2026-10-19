@@ -1,6 +1,6 @@
 {
   "name": "@gbesse/jev-bopi-watch",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Priorise les dépôts de marques françaises potentiellement conflictuels après filtrage par classe, territoire et statut.",
   "type": "module",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "validate": "npm run check && npm run typecheck && npm test && npm run demo",
     "demo:principal": "node examples/demo.mjs",
     "demo:limite": "node examples/cas-limite.mjs",
-    "demo:parcours": "node examples/parcours-comparatif.mjs"
+    "demo:parcours": "node examples/parcours-comparatif.mjs",
+    "demo:missing-goods": "node examples/missing-goods.mjs"
   },
   "devDependencies": {
     "typescript": "5.9.3"
