@@ -147,3 +147,11 @@ Projet indépendant, sans affiliation avec TypeSafe AI ni avec l’administratio
 ```sh
 npm run demo:missing-goods
 ```
+
+## Identité / Identity / Identidad
+
+FR — Les identités et noms vides ou convertis depuis des objets ne sont plus envoyés au modèle. Les données valides restent inchangées.
+
+EN — Blank identities/names or identities coerced from objects no longer reach the model. Valid data remains unchanged.
+
+ES — Identidades y nombres vacíos o convertidos de objetos ya no llegan al modelo. Los datos válidos se conservan.

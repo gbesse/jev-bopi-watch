@@ -9,8 +9,8 @@ function classes(values) {
 }
 
 export function mark(input) {
-  if (!input?.id || !input?.name || !input?.territory)
-    throw new TypeError("A mark needs id, name and territory");
+  if (![input?.id, input?.name, input?.territory].every(value => typeof value === "string" && value.trim().length > 0))
+    throw new TypeError("Identité de marque vide ou invalide / Empty or invalid mark identity / Identidad de marca vacía o no válida");
   return {
     id: String(input.id), name: String(input.name).trim(), goods: String(input.goods || ""),
     niceClasses: classes(input.niceClasses), territory: String(input.territory),

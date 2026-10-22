@@ -1,7 +1,7 @@
 {
   "name": "@gbesse/jev-bopi-watch",
-  "version": "0.1.5",
-  "description": "Priorise les dépôts de marques françaises potentiellement conflictuels après filtrage par classe, territoire et statut.",
+  "version": "0.1.6",
+  "description": "Priorise les d\u00e9p\u00f4ts de marques fran\u00e7aises potentiellement conflictuels apr\u00e8s filtrage par classe, territoire et statut.",
   "type": "module",
   "license": "MIT",
   "engines": {
